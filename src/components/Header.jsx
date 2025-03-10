@@ -3,12 +3,18 @@ import { Link, NavLink , useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Logo from "../assets/logo.png";
 import { useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
 
   const [hidden, setHidden] = useState(true);
   const [darkMode, setDarkMode] = useState( JSON.parse(localStorage.getItem("darkMode"))|| false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setHidden(true);
+  }, [location.pathname]);
 
   useEffect(() => {
     localStorage.setItem("darkMode",JSON.stringify(darkMode));
